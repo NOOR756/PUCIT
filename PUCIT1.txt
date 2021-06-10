@@ -1,0 +1,164 @@
+#include<iostream>
+#include<string.h>
+#include<fstream>
+#include<sstream>
+using namespace std;
+class PUCITstudent {
+    private:
+    string name;
+    string rollNo;
+    float cgpa; 
+    string DegreeProgram; 
+    public:
+    void setName()
+    {
+      cout<<"Enter Name?\n";
+      cin>>name;
+    }
+    void setRollNo()
+    {
+        cout<<"Enter Rollno?\n";
+       cin>>rollNo;
+       cout<<rollNo<<endl;
+    }
+    void setCGPA()
+    {
+       cout<<"Enter CGPA of student:\n";
+       cin>>cgpa;
+        if (cgpa>=1 && cgpa<=4){
+     	   cout<<cgpa<<endl;
+        }else{
+		   cout<<"Enter again cgpa:\n";
+        }
+    }
+    string getName()
+    {
+       return name;
+    }
+    string getRollNo() 
+    { 
+        string rno;
+        rno=rollNo.substr(7,3);
+        cout<<"ROLL NO OF THE STUDENT IS:"<<rollNo.substr(7,3)<<endl;
+        return rollNo;
+    }
+    float getCGPA()
+    {
+    	return cgpa;
+    }
+    string getBatch()
+    {
+	    string Batch=rollNo.substr(3,3);
+	    cout<<"BATCH OF THE STUDENT IS:"<<rollNo.substr(3,3)<<endl;
+	    return Batch;
+    }
+	char getSection()
+	{
+	    string s1;
+		s1=rollNo.substr(6,1);
+		cout<<rollNo.substr(6,1)<<endl;
+	    string s2="M";
+		if(s1==s2)
+         {
+	    	cout<<"Morning"<<endl;
+    	    return 'M';
+		}else{
+           cout<<"Aftarnoon"<<endl;
+           return 'A';
+		}
+	}
+    void displayStudentStatus()
+    {
+	    if(cgpa > 1.7){ 
+	        cout<<"pass\n";
+		}
+        if (cgpa<1.5){
+	        cout<<"drop out\n";
+        }
+        if(cgpa > 1.5 && cgpa < 1.7){
+	        cout<<"considered probation\n";
+        }
+    }
+    string getDegreeProgram()
+    {
+		DegreeProgram=rollNo.substr(0,3);
+    	cout<<"DEGREE PROGRAM OF THE STUDENT IS:"<<rollNo.substr(0,3)<<endl;
+        return DegreeProgram;
+    }
+	void  graduatingYear()
+	{ 
+        string gYear;
+        int i;
+        gYear=rollNo.substr(4,2);
+        std::istringstream(gYear)>>i;
+        cout<<"Admission Year of a student is:   "<<i<<endl;
+        DegreeProgram = getDegreeProgram();
+		//cout<<DegreeProgram.compare("BIT");
+	    if( DegreeProgram.compare("BIT") || DegreeProgram.compare("BSC") || DegreeProgram.compare("BSE")){
+    	    i=i+4;
+        }else if(DegreeProgram.compare("MIT") || DegreeProgram.compare("MCS")){ 
+		    i=i+2;
+        }
+	}
+   void manu()
+   {
+   
+        int choice=1;
+	    while(choice!=0)
+	    {
+	      cout<<"0)Name of the student\n.1)ROLL NO  of the student\n.2)CGPA of the student\n.3)DegreeProgram\n.4)Batch\n.5)Section\n.6)Status\n.7)Graduating Year\n.8)exist"<<endl;
+           cin>>choice;
+	      switch(choice)
+		   {
+	            cout<<"***************************MENU*************************************:"<<endl;
+	            case 0 : 
+			  void setName();
+			  void getName();
+			  break;
+			  case 1: 
+			  void setRollNo();
+			  void getRollNo();
+			  break;
+			  case 2: 
+			  void setCGPA();
+			  void getCGPA();
+			  break;
+              case 3:
+              void getDegreeProgram();
+              break;
+              case 4:
+              void getSection();
+		      break;
+			  case 5 : 
+              void getBatch();
+              break;
+              case 6 : 
+			  void displayStudentStatus();
+              break;
+              case 7:
+              void graduatingYear();
+              break;
+  	          default: 
+			  cout<<"invalid option:"<<endl;
+               break;
+		    }
+	    }
+	}
+};
+
+int main(){
+	PUCITstudent s1;
+    s1.manu();
+    s1.setName();
+    s1.getName();
+    s1.setRollNo();
+	s1.setCGPA();
+	s1.getRollNo();
+	s1.getCGPA();
+	s1.getBatch();
+	s1.getSection();
+	s1.displayStudentStatus();
+	s1.getDegreeProgram();
+	s1.graduatingYear();
+}
+
